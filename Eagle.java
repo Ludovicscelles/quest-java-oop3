@@ -27,25 +27,34 @@ public class Eagle extends Bird implements Fly {
     public void takeOff() {
         if (!this.flying && this.altitude == 0) {
             this.flying = true;
+            System.out.printf("%s takes off into the air.%n", this.getName());
         }
-        System.out.printf("%s takes off into the sky.%n", this.getName());
+
     }
 
     @Override
     public void glide() {
-        if (flying && altitude > 0) {
-            System.out.println("glides into the air.");
-        } else if (!flying) {
-            System.out.printf("%s is not flying and cannot glide.%n", getName());
+        if (!flying) {
+            System.out.printf("%s is not flying and can't glide.%n", this.getName());
+        } else if (altitude <= 100) {
+            System.out.printf("%s is flying but not high enough to glide.%n", this.getName());
         } else {
-            System.out.printf("%s is flying but at ground level and cannot glide.%n", getName());
+            System.out.printf("%s glides through the air.%n", this.getName());
         }
-
     }
 
     @Override
     public int ascend(int meters) {
+        if (meters < 0) {
+            System.out.println("Eagle can't ascend a negative distance.");
+            return this.altitude;
+        }
+        if (!flying) {
+            System.out.printf("%s is not flying and can't ascend.%n", this.getName());
+            return this.altitude;
+        }
         if (flying) {
+
             this.altitude += meters;
             System.out.printf("%s flies upward, altitude : %d%n", this.getName(), this.altitude);
         }
@@ -54,6 +63,14 @@ public class Eagle extends Bird implements Fly {
 
     @Override
     public int descend(int meters) {
+        if (meters < 0) {
+            System.out.println("Eagle can't descend a negative distance.");
+            return this.altitude;
+        }
+        if (!flying) {
+            System.out.printf("%s is not flying and can't descend.%n", this.getName());
+            return this.altitude;
+        }
         if (flying) {
             this.altitude = Math.max(this.altitude - meters, 0);
             System.out.printf("%s flies downward, altitude : %d%n", this.getName(), this.altitude);
