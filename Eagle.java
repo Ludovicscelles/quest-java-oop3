@@ -53,11 +53,8 @@ public class Eagle extends Bird implements Fly {
             System.out.printf("%s is not flying and can't ascend.%n", this.getName());
             return this.altitude;
         }
-        if (flying) {
-
-            this.altitude += meters;
-            System.out.printf("%s flies upward, altitude : %d%n", this.getName(), this.altitude);
-        }
+        this.altitude += meters;
+        System.out.printf("%s flies upward, altitude : %d%n", this.getName(), this.altitude);
         return this.altitude;
     }
 
@@ -71,10 +68,8 @@ public class Eagle extends Bird implements Fly {
             System.out.printf("%s is not flying and can't descend.%n", this.getName());
             return this.altitude;
         }
-        if (flying) {
-            this.altitude = Math.max(this.altitude - meters, 0);
-            System.out.printf("%s flies downward, altitude : %d%n", this.getName(), this.altitude);
-        }
+        this.altitude = Math.max(this.altitude - meters, 0);
+        System.out.printf("%s flies downward, altitude : %d%n", this.getName(), this.altitude);
         return this.altitude;
     }
 
